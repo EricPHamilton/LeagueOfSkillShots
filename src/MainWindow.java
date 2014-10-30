@@ -1,6 +1,11 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 public class MainWindow {
@@ -11,6 +16,8 @@ public class MainWindow {
         frame.setLocationRelativeTo(null);
         frame.add(new LeagueCanvas());
         frame.setVisible(true);
+        frame.addMouseMotionListener(new MouseComponent());
+        frame.addKeyListener(new KeyComponent());
         LeagueCanvas.skillName = skillName;
 	}
 }
@@ -21,15 +28,12 @@ class LeagueCanvas extends JComponent {
 	private int lastY = 0;
 	static String skillName;
 	
-	ArrayList<LeagueProjectile> projectiles;
+	static ArrayList<LeagueProjectile> projectiles;
 	
 	public LeagueCanvas() {
 		Thread animThread = new Thread(new Runnable() {
 			public void run() {
 				projectiles = new ArrayList<LeagueProjectile>();
-				
-				projectiles.add(new LeagueProjectile(10, 0, 100, 100, Color.GREEN, 20));
-				projectiles.add(new LeagueProjectile(20, 180, 400, 400, Color.BLUE, 20));
 				
 				while (true) {
 					repaint();
@@ -67,4 +71,55 @@ class LeagueCanvas extends JComponent {
 		}
 		
 	}
+
+	public static void addProjectile(LeagueProjectile leagueProjectile) {
+		projectiles.add(leagueProjectile);
+		
+	}
+}
+
+@SuppressWarnings("serial")
+class MouseComponent extends JComponent implements MouseMotionListener {
+
+	static int lastX = 0;
+	static int lastY = 0;
+	
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		lastX = arg0.getX();
+		lastY = arg0.getY()-40;
+		
+	}
+}
+
+class KeyComponent extends JComponent implements KeyListener {
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		//TODO: Instead of "q", make it the selected ability's key
+		if (e.getKeyChar() == 'q') {
+			LeagueCanvas.addProjectile(new LeagueProjectile(20, 180, MouseComponent.lastX, MouseComponent.lastY, Color.BLUE, 20));
+			System.out.println("Spawning Projectile");
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
