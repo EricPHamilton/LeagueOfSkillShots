@@ -3,6 +3,7 @@
 import java.awt.Color;
 
 public class LeagueProjectile {
+	String skillName;
 	int totalSpeed;
 	int xSpeed;
 	int ySpeed;

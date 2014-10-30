@@ -4,13 +4,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class mainWindow {
-	public static void main (String[] args) {
+	public static void runGUI(String skillName) {
 		JFrame frame = new JFrame("Skill Shot Window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 1000);
         frame.setLocationRelativeTo(null);
         frame.add(new LeagueCanvas());
         frame.setVisible(true);
+        LeagueCanvas.skillName = skillName;
 	}
 }
 
@@ -18,6 +19,7 @@ class LeagueCanvas extends JComponent {
 	
 	private int lastX = 0;
 	private int lastY = 0;
+	static String skillName;
 	
 	ArrayList<LeagueProjectile> projectiles;
 	
@@ -32,12 +34,11 @@ class LeagueCanvas extends JComponent {
 				while (true) {
 					repaint();
 					try {
-						Thread.sleep(100);
+						//30 FPS
+						Thread.sleep(33);
 					} catch (Exception ex) {
 						System.out.println(ex.getStackTrace());
 					}
-					
-					System.out.println(projectiles);
 				}
 			}
 		});
