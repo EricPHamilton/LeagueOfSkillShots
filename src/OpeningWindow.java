@@ -45,7 +45,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.DefaultComboBoxModel;
 
 
-public class openingWindow {
+public class OpeningWindow {
 
 	private JFrame frmLeagueOfSkill;
 	private final Action action = new SwingAction();
@@ -58,7 +58,7 @@ public class openingWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					openingWindow window = new openingWindow();
+					OpeningWindow window = new OpeningWindow();
 					window.frmLeagueOfSkill.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,7 +70,7 @@ public class openingWindow {
 	/**
 	 * Create the application.
 	 */
-	public openingWindow() {
+	public OpeningWindow() {
 		initialize();
 	}
 
@@ -100,7 +100,7 @@ public class openingWindow {
 		JButton btnNewButton_1 = new JButton("Start");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainWindow.runGUI(comboBox.getSelectedItem().toString());
+				MainWindow.runGUI(comboBox.getSelectedItem().toString());
 			}
 		});
 		

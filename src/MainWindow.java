@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class mainWindow {
+public class MainWindow {
 	public static void runGUI(String skillName) {
 		JFrame frame = new JFrame("Skill Shot Window");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
