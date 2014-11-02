@@ -5,11 +5,11 @@ import java.awt.Color;
 public class LeagueProjectile {
 	String skillName;
 	int totalSpeed;
-	int xSpeed;
-	int ySpeed;
+	double xSpeed;
+	double ySpeed;
 	double dir; //0 - 359, follows unit circle directionals
-	int xPos;
-	int yPos;
+	double xPos;
+	double yPos;
 	Color color;
 	int radiusOfHitbox;
 	
@@ -19,8 +19,8 @@ public class LeagueProjectile {
 		this.totalSpeed = totalSpeed;
 		this.dir = dirDegrees;
 		
-		xSpeed = (int) (totalSpeed * Math.cos(dirDegrees));
-		ySpeed = -1 * (int) (totalSpeed * Math.sin(dirDegrees));
+		xSpeed = totalSpeed * Math.cos(dirDegrees);
+		ySpeed = -1 * totalSpeed * Math.sin(dirDegrees);
 		
 		xPos = startingX;
 		yPos = startingY;
