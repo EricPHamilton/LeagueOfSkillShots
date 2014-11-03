@@ -87,10 +87,6 @@ class MouseComponent extends JComponent implements MouseMotionListener {
 
 	static int lastX = 0;
 	static int lastY = 0;
-	static boolean northWest= false;
-	static boolean northEast= false;
-	static boolean southWest= false;
-	static boolean southEast= false;
 	
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
@@ -122,10 +118,9 @@ class KeyComponent extends JComponent implements KeyListener {
 			if (chX < 0) {
 				dir += 180;
 			}
-			
-			System.out.println("Ch X: " + chX + ", Ch Y: " + chY + ", Dir: " + dir);
-			
-			LeagueCanvas.addProjectile(new LeagueProjectile(20, dir, 500, 500, Color.BLUE, 10));
+						
+			Skill skill = new Skill(LeagueCanvas.skillName);
+			LeagueCanvas.addProjectile(new LeagueProjectile(skill.name, dir, 500, 500));
 		}
 		
 	}

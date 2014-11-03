@@ -13,10 +13,16 @@ public class LeagueProjectile {
 	Color color;
 	int radiusOfHitbox;
 	
-	public LeagueProjectile (int totalSpeed, double dir, int startingX, int startingY, Color color, int radiusOfHitbox) {
+	public LeagueProjectile (String skillName, double dir, int startingX, int startingY) {
+		this.skillName = skillName;
+		Skill skillObj = new Skill(skillName);
+		
+		this.totalSpeed = skillObj.speed;
+		this.color = skillObj.color;
+		this.radiusOfHitbox = skillObj.radiusOfHitbox;
+		
 		double dirDegrees = Math.toRadians(dir);
 		
-		this.totalSpeed = totalSpeed;
 		this.dir = dirDegrees;
 		
 		xSpeed = totalSpeed * Math.cos(dirDegrees);
@@ -24,9 +30,6 @@ public class LeagueProjectile {
 		
 		xPos = startingX;
 		yPos = startingY;
-		
-		this.color = color;
-		this.radiusOfHitbox = radiusOfHitbox;
 	}
 	
 	public boolean isOffScreen() {
