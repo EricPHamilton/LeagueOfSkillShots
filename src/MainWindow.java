@@ -58,7 +58,7 @@ class LeagueCanvas extends JComponent {
 		int h = getHeight();
 		
 		twodg.setColor(Color.BLACK);
-		twodg.fillOval(500, 460, 50, 50);
+		twodg.fillOval(w/2 - 12, h/2 - 12, 50, 50);
 		
 		for (int i = 0 ; i < projectiles.size() ; i++) {
 			LeagueProjectile p = projectiles.get(i);
@@ -66,7 +66,7 @@ class LeagueCanvas extends JComponent {
 			p.xPos += p.xSpeed;
 			p.yPos += p.ySpeed;
 			twodg.setColor(p.color);
-			twodg.fillOval((int)p.xPos, (int)p.yPos, p.radiusOfHitbox - (p.radiusOfHitbox / 2), p.radiusOfHitbox - (p.radiusOfHitbox / 2));
+			twodg.fillOval((int)(p.xPos - (p.radiusOfHitbox / 2)), (int)(p.yPos - (p.radiusOfHitbox / 2)), p.radiusOfHitbox*2, p.radiusOfHitbox*2);
 			
 			if (p.isOffScreen()) {
 				projectiles.remove(i);
@@ -112,14 +112,20 @@ class KeyComponent extends JComponent implements KeyListener {
 		//TODO: Instead of "q", make it the selected ability's key
 		if (e.getKeyChar() == 'q') {
 			
-			double dir = 0;
-			dir = Math.atan((500 - MouseComponent.lastY) / (MouseComponent.lastX - 500));
+			double dir = 0;			
+			double chX = MouseComponent.lastX - 500;
+			double chY = 500 - MouseComponent.lastY;
 			
-			dir = Math.toDegrees(dir);
+			dir = Math.toDegrees(Math.atan(chY/chX));
 			
-			LeagueCanvas.addProjectile(new LeagueProjectile(20, dir, 500, 500, Color.BLUE, 20));
-			System.out.println("Spawning Projectile");
-			System.out.println("Dir" + dir);
+			//Allows projectile to spawn in correct direction
+			if (chX < 0) {
+				dir += 180;
+			}
+			
+			System.out.println("Ch X: " + chX + ", Ch Y: " + chY + ", Dir: " + dir);
+			
+			LeagueCanvas.addProjectile(new LeagueProjectile(20, dir, 500, 500, Color.BLUE, 10));
 		}
 		
 	}
